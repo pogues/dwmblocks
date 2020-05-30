@@ -1,10 +1,10 @@
 PREFIX ?= /usr/local
-SCRIPT_DIR ?= \"~/.config/dwm/bar/\"
+SCRIPT_DIR ?= ~/.config/dwm/bar
 
 output: dwmblocks.o
 	gcc dwmblocks.o -lX11 -o dwmblocks
 dwmblocks.o: dwmblocks.c config.h
-	gcc -DSCRIPT_DIR=$(SCRIPT_DIR) -c -lX11 dwmblocks.c
+	gcc -c -lX11 dwmblocks.c
 clean:
 	rm -f *.o *.gch dwmblocks
 install: output

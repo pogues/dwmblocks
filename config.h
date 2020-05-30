@@ -1,4 +1,6 @@
 // Modify this file to change what commands output to your statusbar, and recompile using the make command.
+#define SCRIPT_DIR "~/.config/dwm/bar/"
+
 static const Block blocks[] = {
     /*Icon*/    /*Command*/        /*Update Interval*/    /*Update Signal*/
     {"", SCRIPT_DIR "pacpackages", 0,    8},
