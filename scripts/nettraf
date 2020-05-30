@@ -13,8 +13,8 @@ esac
 logfile="${XDG_CACHE_HOME:-$HOME/.cache}/netlog"
 # make sure it exists (otherwise script fails
 if [[ ! -e $logfile ]]
-    echo "0 0" > "$logfile"
 then
+    echo "0 0" > "$logfile"
 fi
 
 prevdata="$(cat "$logfile")"
