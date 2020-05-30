@@ -1,5 +1,5 @@
 PREFIX ?= /usr/local
-SCRIPT_DIR ?= ~/.config/dwm/bar
+SCRIPT_DIR ?= \"~/.config/dwm/bar/\"
 
 output: dwmblocks.o
 	gcc dwmblocks.o -lX11 -o dwmblocks
