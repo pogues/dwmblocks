@@ -9,4 +9,26 @@ case $BLOCK_BUTTON in
     6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-sensors | awk '/Core 0/ {print "🌡" $3}'
+# get the cpu %
+cpu_pct () {
+    read cpu a b c previdle rest < /proc/stat
+    prevtotal=$((a+b+c+previdle))
+    sleep 0.5
+    read cpu a b c idle rest < /proc/stat
+    total=$((a+b+c+idle))
+    cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
+    echo "$cpu%"
+}
+
+
+cpu_temp () {
+    res=$( sensors | awk '/Package id 0:/ {print $4}' )
+    echo "$res"
+}
+
+
+
+#sensors | awk '/Core 0/ {print "🌡" $3 "|"}'
+cpu=$(cpu_pct)
+temp=$(cpu_temp)
+echo "CPU $cpu, $temp |"
