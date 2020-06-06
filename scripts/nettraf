@@ -4,12 +4,6 @@
 # transmitted (TX) since the previous time this script ran. So if run every
 # second, gives network traffic per second.
 
-case "$BLOCK_BUTTON" in
-    3) notify-send "🌐 Network traffic module" "🔻: Traffic received
-🔺: Traffic transmitted" ;;
-    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
-esac
-
 logfile="${XDG_CACHE_HOME:-$HOME/.cache}/netlog"
 # make sure it exists (otherwise script fails
 if [[ ! -e $logfile ]]
@@ -22,7 +16,7 @@ prevdata="$(cat "$logfile")"
 rxcurrent="$(($(cat /sys/class/net/*/statistics/rx_bytes | paste -sd '+')))"
 txcurrent="$(($(cat /sys/class/net/*/statistics/tx_bytes | paste -sd '+')))"
 
-printf "\x04🔻%sKiB 🔺%sKiB \x08|\\n" \
+printf "\x04Dn:%skb Up:%skb \x08|\\n" \
     "$(((rxcurrent-${prevdata%% *})/1024))" \
     "$(((txcurrent-${prevdata##* })/1024))"
 
