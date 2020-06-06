@@ -27,4 +27,5 @@ case $BLOCK_BUTTON in
 esac
 
 #date "+%a %d %b $icon%H:%M%p"
-date "+%a %d %b %H:%M "
+the_date=$(date "+%a %d %b %H:%M ")
+printf "\x05$the_date\\n"

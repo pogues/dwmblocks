@@ -31,4 +31,4 @@ cpu_temp () {
 #sensors | awk '/Core 0/ {print "🌡" $3 "|"}'
 cpu=$(cpu_pct)
 temp=$(cpu_temp)
-echo "CPU $cpu, $temp |"
+printf "\x08 CPU %s, %s \x08|\\n" "$cpu" "$temp"

@@ -22,7 +22,7 @@ prevdata="$(cat "$logfile")"
 rxcurrent="$(($(cat /sys/class/net/*/statistics/rx_bytes | paste -sd '+')))"
 txcurrent="$(($(cat /sys/class/net/*/statistics/tx_bytes | paste -sd '+')))"
 
-printf "🔻%sKiB 🔺%sKiB |\\n" \
+printf "\x04🔻%sKiB 🔺%sKiB \x08|\\n" \
     "$(((rxcurrent-${prevdata%% *})/1024))" \
     "$(((txcurrent-${prevdata##* })/1024))"
 
