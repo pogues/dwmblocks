@@ -9,7 +9,7 @@ ethernet=$(sed "s/down//;s/up/E/" /sys/class/net/e*/operstate 2>/dev/null)
 
 if [ -n "$ethernet" ] && [ -n "$wifisignal" ]
 then
-    printf "\x04 E+%s\\n" $wifisignal
+    printf "\x04E+%s\\n" $wifisignal
 elif [ -n "$ethernet" ]
 then
     printf "\x04E\\n"
@@ -17,6 +17,6 @@ elif [ -n "$wifisignal" ]
 then
     printf "%s\\n" $wifisignal
 else
-    printf "\x04 OFFLINE \\n"
+    printf "\x04OFFLINE \\n"
 fi
 
