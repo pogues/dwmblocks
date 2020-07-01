@@ -17,5 +17,17 @@
 # When = PostTransaction
 # Exec = /usr/bin/pkill -RTMIN+8 dwmblocks # Or i3blocks if using i3.
 
-pkgs=$(pacman -Qu | grep -Fcv "[ignored]")
-[ "$pkgs" != "0" ] && printf "\x05UPDATES: $pkgs \x08|\\n"
+# don't use pacman -Qu as that needs a sudo pacman -Sy first!
+#pkgs=$(pacman -Qu | grep -Fcv "[ignored]")
+
+#pkgs=$(checkupdates | wc -l)
+#[ $? -eq 0 ] && printf "\x05UPDATES: $pkgs \x08|\\n"
+
+
+pkgs=$(checkupdates)
+# only take an exit code of 0; 2 is no updates, 1 is an error
+if [ $? -eq 0 ]
+then
+    npkgs=$(echo $pkgs | wc -l)
+    printf "\x05UPDATES: $npkgs \x08|\\n"
+fi
