@@ -3,7 +3,7 @@
 
 static const Block blocks[] = {
     /*Icon*/    /*Command*/        /*Update Interval*/    /*Update Signal*/
-    {"", SCRIPT_DIR "pacpackages", 0,    8},
+    {"", SCRIPT_DIR "pacpackages", 3600, 8},
     {"", SCRIPT_DIR "internet",    10,   4},
     {"", SCRIPT_DIR "nettraf",     1,    16},
     {"", SCRIPT_DIR "volume",      0,    10},
