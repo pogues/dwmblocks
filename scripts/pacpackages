@@ -1,33 +1,16 @@
 #!/bin/sh
 
 # Displays number of upgradeable packages.
-# For this to work, have a `pacman -Sy` command run in the background as a
-# cronjob every so often as root. This script will then read those packages.
-# When clicked, it will run an upgrade via pacman.
 #
-# Add the following text as a file in /usr/share/libalpm/hooks/statusbar.hook:
-#
-# [Trigger]
-# Operation = Upgrade
-# Type = Package
-# Target = *
-#
-# [Action]
-# Description = Updating statusbar...
-# When = PostTransaction
-# Exec = /usr/bin/pkill -RTMIN+8 dwmblocks # Or i3blocks if using i3.
-
-# don't use pacman -Qu as that needs a sudo pacman -Sy first!
-#pkgs=$(pacman -Qu | grep -Fcv "[ignored]")
-
-#pkgs=$(checkupdates | wc -l)
-#[ $? -eq 0 ] && printf "\x05UPDATES: $pkgs \x08|\\n"
-
 
 pkgs=$(checkupdates)
 # only take an exit code of 0; 2 is no updates, 1 is an error
 if [ $? -eq 0 ]
 then
-    npkgs=$(echo $pkgs | wc -l)
+    # here we count the words and divide by 4.  the format is 
+    #    package installed_version -> update_version
+    # we don't use wc -l as echoing the variable seems to strip the newlines!
+    # and it is inefficient to call checkupdates again
+    npkgs=$(( $(echo $pkgs | wc -w) / 4 ))
     printf "\x05UPDATES: $npkgs \x08|\\n"
 fi
