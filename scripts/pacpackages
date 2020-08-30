@@ -1,16 +1,12 @@
 #!/bin/sh
 
 # Displays number of upgradeable packages.
-#
 
 pkgs=$(checkupdates)
 # only take an exit code of 0; 2 is no updates, 1 is an error
 if [ $? -eq 0 ]
 then
-    # here we count the words and divide by 4.  the format is 
-    #    package installed_version -> update_version
-    # we don't use wc -l as echoing the variable seems to strip the newlines!
-    # and it is inefficient to call checkupdates again
-    npkgs=$(( $(echo $pkgs | wc -w) / 4 ))
+    # echo pkgs in quotes - otherwise the newlines are stripped 
+    npkgs=$(echo "$pkgs" | wc -l)
     printf "\x05UPDATES: $npkgs \x08|\\n"
 fi
