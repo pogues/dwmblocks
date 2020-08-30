@@ -4,9 +4,14 @@
 static const Block blocks[] = {
     /*Icon*/    /*Command*/        /*Update Interval*/    /*Update Signal*/
     {"", SCRIPT_DIR "pacpackages", 3600, 8},
+#ifdef LAPTOP
+    {"", SCRIPT_DIR "battery",     60,   15},
+#endif
     {"", SCRIPT_DIR "internet",    10,   4},
     {"", SCRIPT_DIR "nettraf",     1,    16},
+#ifndef LAPTOP
     {"", SCRIPT_DIR "volume",      0,    10},
+#endif
     {"", SCRIPT_DIR "memory",      60,   14},
     {"", SCRIPT_DIR "cpu",         10,   18},
     {"", SCRIPT_DIR "clock",       60,   1},
