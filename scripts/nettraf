@@ -13,11 +13,30 @@ fi
 
 prevdata="$(cat "$logfile")"
 
+function fmt_mem {
+    curr=$1
+    prev=$2
+    mem_in_k=$(( ($curr - $prev) / 1024 ))
+
+    if [ $mem_in_k -gt 999 ]
+    then
+        mb=$(( $mem_in_k / 1024 ))
+        dec=$(( ( $mem_in_k - ( 1024 * $mb ) ) / 103 ))
+        printf "%d.%dM" $mb $dec
+    else
+        printf "%dk" $mem_in_k
+    fi
+}
+
 rxcurrent="$(($(cat /sys/class/net/*/statistics/rx_bytes | paste -sd '+')))"
 txcurrent="$(($(cat /sys/class/net/*/statistics/tx_bytes | paste -sd '+')))"
 
-printf "\x04Dn:%skb Up:%skb \x08|\\n" \
-    "$(((rxcurrent-${prevdata%% *})/1024))" \
-    "$(((txcurrent-${prevdata##* })/1024))"
+down=$(fmt_mem $rxcurrent ${prevdata%% *})
+up=$(fmt_mem $txcurrent ${prevdata##* })
+
+#printf "\x04Dn:%skb Up:%skb \x08|\\n" \
+#    "$(((rxcurrent-${prevdata%% *})/1024))" \
+#    "$(((txcurrent-${prevdata##* })/1024))"
+printf "\x04D:%s U:%s \x08|\\n" $down $up
 
 echo "$rxcurrent $txcurrent" > "$logfile"
