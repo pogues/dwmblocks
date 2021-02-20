@@ -3,6 +3,7 @@
 
 static const Block blocks[] = {
     /*Icon*/    /*Command*/        /*Update Interval*/    /*Update Signal*/
+    {"", SCRIPT_DIR "spacer",      0,    0},
     {"", SCRIPT_DIR "pacpackages", 3600, 8},
 #ifdef LAPTOP
     {"", SCRIPT_DIR "battery",     60,   15},
