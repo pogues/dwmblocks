@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# get the cpu %
+gpu_pct () {
+    # sudo grep -A6 MCLK /sys/kernel/debug/dri/0/amdgpu_pm_info
+    # prints GPU Temperature / GPU Load / Mem Load on different lines.
+    # but needs sudo
+    echo "0"
+}
+
+
+gpu_temp () {
+    res=$( sensors | awk '/edge:/ {print $2}' )
+    echo "$res"
+}
+
+gpu=$(gpu_pct)
+temp=$(gpu_temp)
+printf "\x08GPU %s, %s \x08|\\n" "$gpu" "$temp"

@@ -15,6 +15,9 @@ static const Block blocks[] = {
 #endif
     {"", SCRIPT_DIR "memory",      60,   14},
     {"", SCRIPT_DIR "cpu",         10,   18},
+#ifndef LAPTOP
+    {"", SCRIPT_DIR "gpu",         10,   19},
+#endif
     {"", SCRIPT_DIR "clock",       60,   1},
 };
 
