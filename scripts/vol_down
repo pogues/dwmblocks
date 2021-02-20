@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# increment by 5
+/usr/bin/pamixer -d 5
+
+# send a signal to dwmblocks to refresh volume
+kill -44 $(pidof dwmblocks)
