@@ -13,7 +13,7 @@ cpu_pct () {
 
 
 cpu_temp () {
-    res=$( sensors | awk '/Package id 0:/ {print $4}' )
+    res=$( sensors | awk '/Package id 0:/ {print $4}' | sed -e 's/+//' )
     echo "$res"
 }
 
