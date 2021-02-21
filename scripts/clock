@@ -1,4 +1,4 @@
 #!/bin/sh
 
-the_date=$(date "+%a %d %b %H:%M ")
+the_date=$(date +%R)
 printf "\x05$the_date\\n"

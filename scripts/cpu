@@ -19,4 +19,4 @@ cpu_temp () {
 
 cpu=$(cpu_pct)
 temp=$(cpu_temp)
-printf "\x08CPU %s, %s \x03|\\n" "$cpu" "$temp"
+printf "\x08C %s, %s \x03|\\n" "$cpu" "$temp"
