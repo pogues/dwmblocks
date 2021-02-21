@@ -1,4 +1,4 @@
 #!/bin/sh
 
 the_date=$(date +%R)
-printf "\x05$the_date\\n"
+printf "\x05$the_date \\n"

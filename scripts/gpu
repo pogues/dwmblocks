@@ -16,4 +16,5 @@ gpu_temp () {
 
 gpu=$(gpu_pct)
 temp=$(gpu_temp)
-printf "\x09G %s, %s \x03|\\n" "$gpu" "$temp"
+#printf "\x09 %s, %s \x03|\\n" "$gpu" "$temp"
+printf "\x09  %s \x03|\\n" "$temp"

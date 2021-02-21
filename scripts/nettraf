@@ -37,6 +37,6 @@ up=$(fmt_mem $txcurrent ${prevdata##* })
 #printf "\x04Dn:%skb Up:%skb \x08|\\n" \
 #    "$(((rxcurrent-${prevdata%% *})/1024))" \
 #    "$(((txcurrent-${prevdata##* })/1024))"
-printf "\x04D:%s U:%s \x03|\\n" $down $up
+printf "\x04%s %s \x03|\\n" $down $up
 
 echo "$rxcurrent $txcurrent" > "$logfile"

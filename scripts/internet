@@ -2,17 +2,17 @@
 
 case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
     down) wifisignal="" ;;
-    up) wifisignal="$(awk '/^\s*w/ { print "W("int($3 * 100 / 70) ")%" }' /proc/net/wireless)" ;;
+    up) wifisignal="$(awk '/^\s*w/ { print ""int($3 * 100 / 70) "%" }' /proc/net/wireless)" ;;
 esac
 
 ethernet=$(sed "s/down//;s/up/E/" /sys/class/net/e*/operstate 2>/dev/null)
 
 if [ -n "$ethernet" ] && [ -n "$wifisignal" ]
 then
-    printf "\x04E+%s\\n" $wifisignal
+    printf "\x04+%s\\n" $wifisignal
 elif [ -n "$ethernet" ]
 then
-    printf "\x04E\\n"
+    printf "\x04\\n"
 elif [ -n "$wifisignal" ]
 then
     printf "\x04%s\\n" $wifisignal
