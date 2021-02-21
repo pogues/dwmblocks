@@ -10,10 +10,10 @@ gpu_pct () {
 
 
 gpu_temp () {
-    res=$( sensors | awk '/edge:/ {print $2}' )
+    res=$( sensors | awk '/edge:/ {print $2}' | sed -e 's/+//' )
     echo "$res"
 }
 
 gpu=$(gpu_pct)
 temp=$(gpu_temp)
-printf "\x08GPU %s, %s \x08|\\n" "$gpu" "$temp"
+printf "\x09GPU %s, %s \x03|\\n" "$gpu" "$temp"

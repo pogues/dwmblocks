@@ -7,5 +7,5 @@ do
 
     # if 25% or less add n ! as a warning
     [[ "$capacity" -le 25 ]] && [[ "$status" = "D" ]] && warn="!"
-    printf "%s%s%s%% \x08|\\n" "$status" "$warn" "$capacity"
+    printf "%s%s%s%% \x03|\\n" "$status" "$warn" "$capacity"
 done | sed 's/ *$//'

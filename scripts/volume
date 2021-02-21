@@ -11,4 +11,4 @@ vol="$(echo "$volstat" | grep '[0-9]\+%' | sed "s,.* \([0-9]\+\)%.*,\1,;1q")"
 vol="$(echo "$volstat" | grep "Volume" | grep -v "Base" | sed -e "s:.* \([0-9]\+\)%.*:\1:")"
 # vol=$(echo "$volstat" | grep -o "\[[0-9]\+%\]" | sed "s/[^0-9]*//g;1q") # ALSA
 
-printf "\x06Vol:%3.0f%% \x08|\\n" "$vol"
+printf "\x06Vol:%3.0f%% \x03|\\n" "$vol"

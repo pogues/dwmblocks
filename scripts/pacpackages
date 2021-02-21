@@ -8,5 +8,5 @@ if [ $? -eq 0 ]
 then
     # echo pkgs in quotes - otherwise the newlines are stripped 
     npkgs=$(echo "$pkgs" | wc -l)
-    printf "\x05UPDATES: $npkgs \x08|\\n"
+    printf "\x05UPDATES: $npkgs \x03|\\n"
 fi
