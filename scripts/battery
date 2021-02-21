@@ -3,9 +3,13 @@
 for battery in /sys/class/power_supply/BAT?
 do
     capacity=$(cat "$battery"/capacity 2>/dev/null) || break
-    status=$(sed "s/[Dd]ischarging/D/;s/[Nn]ot charging/X/;s/[Cc]harging/C/;s/[Uu]nknown/U/;s/[Ff]ull/F/" "$battery"/status)
+    status=$(sed "s/discharging/D/i;s/not charging/X/i;s/charging/C/i;s/unknown/U/i;s/full/F/i" "$battery"/status)
 
-    # if 25% or less add n ! as a warning
-    [[ "$capacity" -le 25 ]] && [[ "$status" = "D" ]] && warn="!"
-    printf "%s%s%s%% \x03|\\n" "$status" "$warn" "$capacity"
+    # if 25% or less add red colour as a warning
+    if [[ "$capacity" -le 25 ]] && [[ "$status" = "D" ]]
+    then
+        printf "\x05%s%s%% \x03|\\n" "$status" "$capacity"
+    else
+        printf "\x08%s%s%% \x03|\\n" "$status" "$capacity"
+    fi
 done | sed 's/ *$//'
