@@ -3,13 +3,40 @@
 for battery in /sys/class/power_supply/BAT?
 do
     capacity=$(cat "$battery"/capacity 2>/dev/null) || break
-    status=$(sed "s/discharging/D/i;s/not charging/X/i;s/charging/C/i;s/unknown/U/i;s/full/F/i" "$battery"/status)
+    status=$(sed "s/discharging/D/i;s/not charging/X/i;s/charging//i;s/unknown/U/i;s/full//i" "$battery"/status)
 
-    # if 25% or less add red colour as a warning
-    if [[ "$capacity" -le 25 ]] && [[ "$status" = "D" ]]
+    # if 25% or less add red colour as a warning, yellow if charging
+    if [[ "$capacity" -le 25 ]]
     then
-        printf "\x05%s%s%% \x03|\\n" "$status" "$capacity"
+        if [[ "$status" = "D" ]]
+        then
+            printf "\x05"
+        else
+            printf "\x07"
+        fi
     else
-        printf "\x08%s%s%% \x03|\\n" "$status" "$capacity"
+        printf "\x08"
     fi
+
+    # now print the icon and capacity
+    if [[ "$status" = "D" ]]
+    then
+        if [[ "$capacity" -le 10 ]]
+        then
+            status=""
+        elif [[ "$capacity" -le 35 ]]
+        then
+            status=""
+        elif [[ "$capacity" -le 60 ]]
+        then
+            status=""
+        elif [[ "$capacity" -le 90 ]]
+        then
+            status=""
+        else
+            status=""
+        fi
+    fi
+    printf "%s%s%% \x03" "$icon" "$capacity"
+
 done | sed 's/ *$//'
